@@ -13,14 +13,6 @@ exports.index = async (req, res, next) => {
   });
 };
 
-exports.bio = (req, res, next) => {
-  res.status(200).json({
-    fullname: "Krittin kamkar",
-    nickname: "Aom",
-    hobby: "Sleep",
-    gitusername: "Krittin33333",
-  });
-};
 
 exports.register = async (req, res, next) => {
   try {
@@ -29,13 +21,13 @@ exports.register = async (req, res, next) => {
     
 
     const exitEmail = await User.findOne({ email: email });
+    
+    if (exitEmail) {
+      const error = new Error("อีเมลนี้มีผู้ใช้งานแล้ว")
+      error.statusCode = 400
+      throw error;
 
-    // if (exitEmail) {
-    //   const error = new Error("อีเมลนี้มีผู้ใช้งานแล้ว")
-    //   error.statusCode = 400
-    //   throw error;
-
-    // }
+    }
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

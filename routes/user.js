@@ -1,14 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const usersController = require('../controllers/usersController')
+const usersController = require('../controllers/userController')
 const { body } = require('express-validator');
 const passportJWT = require("../middleware/passportJWT")
 const checkAdmin = require("../middleware/checkAdmin")
 
 /* GET users listing. */
 router.get('/', usersController.index);
-
-router.get('/bio', usersController.bio);
 
 router.post('/',[
     body('name').not().isEmpty().withMessage("กรุณาป้อนชื่อสกุลด้วย"),
