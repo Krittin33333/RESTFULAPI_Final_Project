@@ -1,6 +1,6 @@
 const passport = require('passport');
 const config = require('../config/index')
-const User = require('../models/user')
+const User = require('../models/users')
 
 const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
