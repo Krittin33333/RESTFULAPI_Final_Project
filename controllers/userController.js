@@ -141,25 +141,7 @@ exports.login = async (req, res, next) => {
     }
   };
 
-  // exports.update = async (req, res, next) => {
-  //   try {
-  //     const { id } = req.params;
-  //     const { name, email,role } = req.body;
-  //     const user = await User.updateOne({_id : id},{name, email,role})
-  //     if(user.matchedCount === 0){
-  //       const error = new Error('ไม่สินค้าที่ต้องการแก้ไข')
-  //       error.statusCode = 400
-  //       throw error
-  //     }
-  //     res.status(200).json({
-  //       Message: "แก้ไขข้อมูลเรียบร้อยแล้ว",
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
 
-  
   exports.update = async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -211,16 +193,13 @@ exports.login = async (req, res, next) => {
         error.statusCode = 400
         throw error;
   
-      //  throw new Error("ไม่พบผู้ใช้งาน");
+
       } else {
         res.status(200).json({
           data: user,
         });
       }
     } catch (error) {
-      // res.status(400).json({
-      //   error: { Message: "เกิดข้อผิดพลาด : " + error.message },
-      // });
       next(error)
     }
   };
