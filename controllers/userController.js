@@ -115,3 +115,28 @@ exports.login = async (req, res, next) => {
       role: role,
     });
   };
+
+  exports.destroy = async (req, res, next) => {
+    // by id
+    try {
+      const { id } = req.params;
+  
+      const user = await User.deleteOne({
+        _id: id,
+      });
+  
+      if (user.deletedCount === 0) {
+        const error = new Error("ไม่สามารถลบข้อมูลได้ / ไม่พบผู้ใช้งาน")
+        error.statusCode = 400
+        throw error;
+       // throw new Error("ไม่สามารถลบข้อมูลได้ / ไม่พบผู้ใช้งาน");
+  
+      } else {
+        res.status(200).json({
+          message: "ลบข้อมูลเรียบร้อยแล้ว",
+        });
+      }
+    } catch (error) {
+      next(error)
+    }
+  };

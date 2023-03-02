@@ -1,4 +1,5 @@
 const Product = require("../models/products");
+const Brand = require('../models/brands')
 const { validationResult,body } = require("express-validator");
 
 
@@ -13,7 +14,7 @@ exports.index = async (req, res, next) => {
 
 exports.insertt = async (req, res, next) => {
     try {
-      const { name, detail, price} = req.body;
+      const { name, detail, price , brand} = req.body;
 
       const exitname = await Product.findOne({ name: name });
     
@@ -36,6 +37,7 @@ exports.insertt = async (req, res, next) => {
         product.name = name,
         product.detail = detail,
         product.price = price ,
+        product.brand = brand
       
       await product.save();
   

@@ -5,8 +5,12 @@ const productSchema = new Schema({
     name:  String,// String is shorthand for {type: String}
     detail: String,
     price: Number,
-    company: Number
-  },{ collection: "products"});
+    brand : {
+        type: Schema.Types.ObjectId, ref: 'brand'
+    }
+  },{   collection: "products",
+        toJSON: {virtuals:true}});
+
 
 const product = mongoose.model("product",productSchema)
 

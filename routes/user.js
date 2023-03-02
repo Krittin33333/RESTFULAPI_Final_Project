@@ -6,7 +6,7 @@ const passportJWT = require("../middleware/passportJWT")
 const checkAdmin = require("../middleware/checkAdmin")
 
 /* GET users listing. */
-router.get('/', usersController.index);
+router.get('/',[passportJWT.isLogin],[checkAdmin.isAdmin], usersController.index);
 
 router.post('/',[
     body('name').not().isEmpty().withMessage("กรุณาป้อนชื่อสกุลด้วย"),
@@ -20,6 +20,8 @@ router.post('/login',[
 ]  ,usersController.login)
 
 router.get('/me',[passportJWT.isLogin],[checkAdmin.isAdmin], usersController.profile)
+
+router.delete('/delete/:id', usersController.destroy);
 
 
 module.exports = router;

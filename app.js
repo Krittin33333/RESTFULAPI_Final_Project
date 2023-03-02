@@ -12,6 +12,8 @@ const usersRouter = require('./routes/users');
 
 const userRouter = require('./routes/user');
 const productRouter = require('./routes/product');
+const brandRouter = require('./routes/brand');
+
 
 const errorHandler = require('./middleware/errorHandler')
 
@@ -36,6 +38,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/user', userRouter);
 app.use('/product', productRouter);
+app.use('/brand', brandRouter);
 
 app.use(errorHandler);
 
