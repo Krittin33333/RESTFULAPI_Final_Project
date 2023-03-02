@@ -194,3 +194,33 @@ exports.login = async (req, res, next) => {
     }
   };
   
+  exports.show = async (req, res, next) => {
+    // by id
+    try {
+      const { id } = req.params;
+  
+      const user = await User.findOne({
+        _id: id,
+      });
+  
+  
+  
+      if (!user) {
+  
+        const error = new Error("เกิดข้อผิดพลาด : ไม่พบผู้ใช้งาน")
+        error.statusCode = 400
+        throw error;
+  
+      //  throw new Error("ไม่พบผู้ใช้งาน");
+      } else {
+        res.status(200).json({
+          data: user,
+        });
+      }
+    } catch (error) {
+      // res.status(400).json({
+      //   error: { Message: "เกิดข้อผิดพลาด : " + error.message },
+      // });
+      next(error)
+    }
+  };
