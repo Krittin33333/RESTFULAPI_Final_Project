@@ -5,6 +5,7 @@ const { body } = require('express-validator');
 const passportJWT = require("../middleware/passportJWT")
 const checkAdmin = require("../middleware/checkAdmin")
 
+
 router.get('/', productController.index);
 
 router.get('/:id', productController.selectid);

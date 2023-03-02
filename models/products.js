@@ -9,7 +9,7 @@ const productSchema = new Schema({
         type: Schema.Types.ObjectId, ref: 'brand'
     }
   },{   collection: "products",
-        toJSON: {virtuals:true}});
+        });
 
 
 const product = mongoose.model("product",productSchema)
