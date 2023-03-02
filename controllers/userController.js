@@ -140,3 +140,57 @@ exports.login = async (req, res, next) => {
       next(error)
     }
   };
+
+  // exports.update = async (req, res, next) => {
+  //   try {
+  //     const { id } = req.params;
+  //     const { name, email,role } = req.body;
+  //     const user = await User.updateOne({_id : id},{name, email,role})
+  //     if(user.matchedCount === 0){
+  //       const error = new Error('ไม่สินค้าที่ต้องการแก้ไข')
+  //       error.statusCode = 400
+  //       throw error
+  //     }
+  //     res.status(200).json({
+  //       Message: "แก้ไขข้อมูลเรียบร้อยแล้ว",
+  //     });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // };
+
+  
+  exports.update = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const { name, email, password} = req.body;
+
+      const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const error = new Error("ข้อมูลที่ได้รับมาไม่ถูกต้อง");
+      error.statusCode = 422;
+      error.validation = errors.array();
+      throw error;
+    }
+  
+      let user1 = new User();
+      let enpassword = await user1.encryptPassword(password);
+  
+      const user = await User.updateOne(
+        { _id: id },
+        {
+          name: name,
+          email: email,
+          password: enpassword,
+         
+        }
+      );
+      res.status(200).json({
+        message: "เพิ่มข้อมูลเรียบร้อย",
+      });
+    } catch (error) {
+      error.statusCode = 400
+      next(error);
+    }
+  };
+  
