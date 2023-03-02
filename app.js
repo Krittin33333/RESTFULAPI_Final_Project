@@ -8,7 +8,7 @@ const passport = require('passport');
 
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+
 
 const userRouter = require('./routes/user');
 const productRouter = require('./routes/product');
@@ -35,7 +35,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize()); //passportJWT
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/user', userRouter);
 app.use('/product', productRouter);
 app.use('/brand', brandRouter);
