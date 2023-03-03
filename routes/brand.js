@@ -24,4 +24,6 @@ router.put('/update/:id',[
 
 router.get('/:id', brandController.selectid);
 
+router.get('/product/:id', brandController.companyid);
+
 module.exports = router;

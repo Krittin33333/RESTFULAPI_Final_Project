@@ -1,20 +1,21 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const brandSchema = new Schema({
+const brandschema = new Schema({
     name:  String,
     location: String,
     phone_number: Number,
   },{ collection: "brands",
-  toJSON: {virtuals:true}});
+      toJSON: {virtuals:true},
+});
 
-  brandSchema.virtual('product', {
-    ref: 'product',  // Model
+brandschema.virtual('products', {
+    ref: 'Product',  // Model
     localField: '_id', // author id
     foreignField: 'brand', // author in book
     });
 
 
-const brand = mongoose.model("brand",brandSchema)
+const brands = mongoose.model("Brand",brandschema)
 
-module.exports = brand
+module.exports = brands

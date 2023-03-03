@@ -1,4 +1,5 @@
 const Brand = require("../models/brands");
+const Product = require("../models/products")
 const { validationResult,body } = require("express-validator");
 
 
@@ -125,4 +126,29 @@ exports.update = async (req, res, next) => {
     error.statusCode = 400
     next(error);
   }
+};
+
+exports.companyid = async(req, res, next) => {
+   try{    
+ 
+  const { id } = req.params
+  const brand = await Brand.findById(id).populate('products');
+  if (!brand) {
+    const error = new Error("ไม่พบสินค้า / บริษัทผลิต")
+    error.statusCode = 400
+    console.log(id);
+    console.log(products);
+    throw error;}
+
+  // const products = await Product.find().populate('brand');
+    
+  console.log(brand);
+
+   res.status(200).json({
+          data: brand
+        })
+      } catch (error) {
+        next(error);
+      }
+
 };
